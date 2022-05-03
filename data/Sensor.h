@@ -26,11 +26,13 @@ public:
   void setLatitude(double latitude) { this->latitude = latitude; }
   void setLongitude(double longitude) { this->longitude = longitude; }
   void setReliability(bool reliability) { this->reliability = reliability; }
+  void addMeasurement(Measurement *measurement) { this->measurement_list.push_back(measurement); }
 
   long getId() { return id; }
   double getLatitude() { return latitude; }
   double getLongitude() { return longitude; }
   long getReliability() { return reliability; }
+  vector<Measurement *> getMeasurement() { return measurement_list; }
 };
 
 #endif
