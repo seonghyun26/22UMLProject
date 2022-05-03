@@ -1,9 +1,12 @@
 #ifndef SERVICE_USER
 #define SERVICE_USER
 
-class ServiceUser{
-	public:
-		int get_reward(User u);
-}
+#include "../data/SimpleUser.h"
+
+class ServiceUser
+{
+public:
+  int get_reward(SimpleUser user);
+};
 
 #endif
