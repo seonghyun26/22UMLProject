@@ -1,8 +1,8 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include <Measurement.h>
 #include <vector>
+#include "Measurement.h"
 
 class Sensor
 {

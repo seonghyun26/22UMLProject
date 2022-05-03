@@ -2,7 +2,7 @@
 #define MEASUREMENT_H
 
 #include <ctime>
-#include <Attribute.h>
+#include "Attribute.h"
 
 class Measurement
 {
@@ -19,7 +19,8 @@ public:
     attribute = attribute_;
   }
 
-  void setTimestamp(string timestamp_str) { strptime(timestamp_str, "%Y-%Om-%Od %OH:%OM:%OS", this->timestamp); }
+  void setTimestamp(struct tm *timestamp) { this->timestamp = timestamp; }
+  // strptime(timestamp_str, "%Y-%Om-%Od %OH:%OM:%OS", this->timestamp)
   void setValue(double value) { this->value = value; }
   void setAttribute(Attribute *attribute) { this->attribute = attribute; }
 
