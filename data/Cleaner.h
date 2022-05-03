@@ -10,7 +10,7 @@ using namespace std;
 class Cleaner
 {
 protected:
-  // Provider* provider;
+  Provider *provider;
   string id;
   struct tm *startTM;
   struct tm *endTM;
@@ -18,9 +18,9 @@ protected:
   double longitude;
 
 public:
-  Cleaner(string id_, struct tm *start_tm_, struct tm *end_tm_, double latitude_, double longitude_)
+  Cleaner(Provider *provider_, string id_, struct tm *start_tm_, struct tm *end_tm_, double latitude_, double longitude_)
   {
-    // provider = provider_;
+    provider = provider_;
     id = id_;
     startTM = start_tm_;
     endTM = end_tm_;
@@ -28,14 +28,14 @@ public:
     longitude = longitude_;
   }
 
-  // void setProvider(Provider *provider) { this->provider = provider; }
+  void setProvider(Provider *provider) { this->provider = provider; }
   void setId(string id) { this->id = id; }
   void setStartTM(struct tm *start_tm) { this->startTM = start_tm; }
   void setEndTM(struct tm *end_tm) { this->endTM = end_tm; }
   void setLatitude(double latitude) { this->latitude = latitude; }
   void setLongitude(double longitude) { this->longitude = longitude; }
 
-  // Provider *getProvider() { return provider; }
+  Provider *getProvider() { return provider; }
   string getId() { return id; }
   struct tm *getStartTM() { return startTM; }
   struct tm *getEndTM() { return endTM; }
