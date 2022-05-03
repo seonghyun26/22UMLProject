@@ -7,14 +7,14 @@
 using namespace std;
 
 class SimpleUser : public User {
-	public:
+	protected:
 		int rewardCount;
 		vector<Sensor> sensors;
-	private:
-	int getRewardCount(){return rewardCount;}
-	vector<Sensor> getSensors(){return sensors;}
-	void setRewardCount(int rewardCount){this.rewardCount=rewardCount;}
-	void setSensors(vector<Sensor> sensors){this.sensors=sensors;}
+	public:
+		int getRewardCount(){return rewardCount;}
+		vector<Sensor> getSensors(){return sensors;}
+		void setRewardCount(int rewardCount){this->rewardCount=rewardCount;}
+		void setSensors(vector<Sensor> sensors){this->sensors=sensors;}
 }
 
 #endif
