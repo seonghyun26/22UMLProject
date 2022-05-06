@@ -14,6 +14,7 @@ protected:
   vector<Sensor> sensors;
 
 public:
+	SimpleUser();
   int getRewardCount() { return rewardCount; }
   vector<Sensor> getSensors() { return sensors; }
   void setRewardCount(int rewardCount) { this->rewardCount = rewardCount; }

@@ -12,15 +12,16 @@ protected:
 	int type;
 
 public:
-	string getId() { return id; }
-	string getLogin() { return login; }
-	string getPassword() { return password; }
-	int getType() { return type; }
+	User(string id, string login, string password,int type);
+	string getId();
+	string getLogin();
+	string getPassword();
+	int getType();
 
-	void set(string id) { this->id = id; }
-	void set(string login) { this->login = login; }
-	void set(string password) { this->password = password; }
-	void set(int type) { this->type = type; }
+	void setId(string id);
+	void setLogin(string login);
+	void setPassword(string password) ;
+	void setType(int type) ;
 };
 
 #endif

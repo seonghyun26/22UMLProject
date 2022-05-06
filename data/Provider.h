@@ -12,8 +12,9 @@ protected:
   vector<Cleaner *> cleaner_list;
 
 public:
-  vector<Cleaner *> getCleaners() { return cleaner_list; }
-  void addCleaner(Cleaner *cleaner) { cleaner_list.push_back(cleaner); }
+	Provider();
+  vector<Cleaner *> getCleaners() ;
+  void addCleaner(Cleaner *cleaner) ;
 };
 
 #endif

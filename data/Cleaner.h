@@ -18,29 +18,21 @@ protected:
   double longitude;
 
 public:
-  Cleaner(Provider *provider_, string id_, struct tm *start_tm_, struct tm *end_tm_, double latitude_, double longitude_)
-  {
-    provider = provider_;
-    id = id_;
-    startTM = start_tm_;
-    endTM = end_tm_;
-    latitude = latitude_;
-    longitude = longitude_;
-  }
+  Cleaner(Provider *provider_, string id_, struct tm *start_tm_, struct tm *end_tm_, double latitude_, double longitude_);
 
-  void setProvider(Provider *provider) { this->provider = provider; }
-  void setId(string id) { this->id = id; }
-  void setStartTM(struct tm *start_tm) { this->startTM = start_tm; }
-  void setEndTM(struct tm *end_tm) { this->endTM = end_tm; }
-  void setLatitude(double latitude) { this->latitude = latitude; }
-  void setLongitude(double longitude) { this->longitude = longitude; }
+  void setProvider(Provider *provider);
+  void setId(string id);
+  void setStartTM(struct tm *start_tm);
+  void setEndTM(struct tm *end_tm);
+  void setLatitude(double latitude);
+  void setLongitude(double longitude);
 
-  Provider *getProvider() { return provider; }
-  string getId() { return id; }
-  struct tm *getStartTM() { return startTM; }
-  struct tm *getEndTM() { return endTM; }
-  double getLatitude() { return latitude; }
-  double getLongitude() { return longitude; }
+  Provider *getProvider();
+  string getId();
+  struct tm *getStartTM();
+  struct tm *getEndTM();
+  double getLatitude(); 
+  double getLongitude();
 };
 
 #endif

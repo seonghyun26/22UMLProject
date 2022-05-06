@@ -12,21 +12,16 @@ protected:
   Attribute *attribute;
 
 public:
-  Measurement(struct tm *timestamp_, double value_, Attribute *attribute_)
-  {
-    timestamp = timestamp_;
-    value = value_;
-    attribute = attribute_;
-  }
+  Measurement(struct tm *timestamp_, double value_, Attribute *attribute_);
 
-  void setTimestamp(struct tm *timestamp) { this->timestamp = timestamp; }
+  void setTimestamp(struct tm *timestamp) ;
   // strptime(timestamp_str, "%Y-%Om-%Od %OH:%OM:%OS", this->timestamp)
-  void setValue(double value) { this->value = value; }
-  void setAttribute(Attribute *attribute) { this->attribute = attribute; }
+  void setValue(double value) ;
+  void setAttribute(Attribute *attribute) ;
 
-  struct tm *getTimestamp() { return timestamp; }
-  double getValue() { return value; }
-  Attribute *getAttribute() { return attribute; }
+  struct tm *getTimestamp() ;
+  double getValue() ;
+  Attribute *getAttribute() ;
 };
 
 #endif

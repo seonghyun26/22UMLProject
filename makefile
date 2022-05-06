@@ -1,0 +1,43 @@
+main: main.cpp build/AttributesDAO.o build/Attribute.o build/Cleaner.o
+	g++ main.cpp 
+
+#DAO
+build/AttributesDAO.o: DAO/AttributesDAO.cpp
+	g++ -c DAO/AttributesDAO.cpp -o build/AttributesDAO.o
+
+#data
+build/Attribute.o: data/Attribute.cpp
+	g++ -c data/Attribute.cpp -o build/Attribute.o
+
+build/Cleaner.o: data/Cleaner.cpp
+	g++ -c data/Cleaner.cpp -o build/Cleaner.o
+
+build/GovAgent.o: data/GovAgent.cpp
+	g++ -c data/GovAgent.cpp -o build/GovAgent.o
+
+build/Measurement.o: data/Measurement.cpp
+	g++ -c data/Measurement.cpp -o build/Measurement.o
+
+build/Provider.o: data/Provider.cpp
+	g++ -c data/Provider.cpp -o build/Provider.o
+
+build/Sensor.o: data/Sensor.cpp
+	g++ -c data/Sensor.cpp -o build/Sensor.o
+
+build/SimpleUser.o: data/SimpleUser.cpp
+	g++ -c data/SimpleUser.cpp -o build/SimpleUser.o
+
+build/User.o: data/User.cpp
+	g++ -c data/User.cpp -o build/User.o
+
+#service_book
+build/ServiceCleaners.o: sevice_book/ServiceCleaners.cpp
+	g++ -c sevice_book/ServiceCleaners.cpp -o build/ServiceCleaners.o
+
+build/ServiceUser.o: sevice_book/ServiceUser.cpp
+	g++ -c sevice_book/ServiceUser.cpp -o build/ServiceUser.o
+
+build/ServiceGovernement.o: sevice_book/ServiceGovernement.o
+	g++ -c sevice_book/ServiceGovernement.cpp -o build/ServiceGovernement.o
+
+#user_interface
