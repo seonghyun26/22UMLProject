@@ -14,11 +14,11 @@ protected:
   vector<Sensor> sensors;
 
 public:
-	SimpleUser();
-  int getRewardCount() { return rewardCount; }
-  vector<Sensor> getSensors() { return sensors; }
-  void setRewardCount(int rewardCount) { this->rewardCount = rewardCount; }
-  void setSensors(vector<Sensor> sensors) { this->sensors = sensors; }
+	SimpleUser(string id,string login, string password);
+  int getRewardCount();
+  vector<Sensor> getSensors() ;
+  void setRewardCount(int rewardCount) ;
+  void setSensors(vector<Sensor> sensors) ;
 };
 
 #endif

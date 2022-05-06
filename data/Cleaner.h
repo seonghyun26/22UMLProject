@@ -3,6 +3,7 @@
 
 #include <string>
 #include <ctime>
+class Provider;
 #include "Provider.h"
 
 using namespace std;

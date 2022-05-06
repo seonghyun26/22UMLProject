@@ -1,5 +1,5 @@
 #include "SimpleUser.h"
-SimpleUser::SimpleUser(){
+SimpleUser::SimpleUser(string id, string login, string password):User(id,login,password,0){
 	this->rewardCount=0;
 	this->sensors=vector<Sensor>();
 }

@@ -1,7 +1,7 @@
 #ifndef SERVICECLEANERS_H
 #define SERVICECLEANERS_H
 
-#include "Cleaner.h"
+#include "../data/Cleaner.h"
 
 class ServiceCleaners
 {

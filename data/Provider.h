@@ -1,7 +1,9 @@
 #ifndef PROVIDER_H
 #define PROVIDER_H
 
+#include <string>
 #include <vector>
+class Cleaner;
 #include "Cleaner.h"
 #include "User.h"
 
@@ -12,7 +14,7 @@ protected:
   vector<Cleaner *> cleaner_list;
 
 public:
-	Provider();
+	Provider(string id, string login, string password);
   vector<Cleaner *> getCleaners() ;
   void addCleaner(Cleaner *cleaner) ;
 };

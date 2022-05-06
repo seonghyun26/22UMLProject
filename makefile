@@ -1,5 +1,5 @@
-main: main.cpp build/AttributesDAO.o build/Attribute.o build/Cleaner.o
-	g++ main.cpp 
+main: main.cpp build/AttributesDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o
+	g++ main.cpp build/*.o 
 
 #DAO
 build/AttributesDAO.o: DAO/AttributesDAO.cpp
