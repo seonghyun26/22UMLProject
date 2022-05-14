@@ -2,6 +2,7 @@
 #define MEASUREMENT_H
 
 #include <ctime>
+#include <vector>
 #include "Attribute.h"
 
 class Measurement
@@ -9,19 +10,20 @@ class Measurement
 protected:
   struct tm *timestamp;
   double value;
-  Attribute *attribute;
+  vector<Attribute *> attribute_list;
 
 public:
-  Measurement(struct tm *timestamp_, double value_, Attribute *attribute_);
+  Measurement(struct tm *timestamp_);
+  Measurement(struct tm *timestamp_, double value_);
 
-  void setTimestamp(struct tm *timestamp) ;
+  void setTimestamp(struct tm *timestamp);
   // strptime(timestamp_str, "%Y-%Om-%Od %OH:%OM:%OS", this->timestamp)
-  void setValue(double value) ;
-  void setAttribute(Attribute *attribute) ;
+  void setValue(double value);
+  void addAttribute(Attribute *attribute);
 
-  struct tm *getTimestamp() ;
-  double getValue() ;
-  Attribute *getAttribute() ;
+  struct tm *getTimestamp();
+  double getValue();
+  vector<Attribute *> getAttributeList();
 };
 
 #endif
