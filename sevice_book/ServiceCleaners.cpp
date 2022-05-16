@@ -24,7 +24,7 @@ bool cmpMeasurementByTM(Measurement *a, Measurement *b)
 
 // Return Radius cleaned by cleaners
 // Needs the whole sensor* vector list as input
-long ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list)
+double ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list)
 {
   struct tm *startTM = c->getStartTM();
   struct tm *endTM = c->getEndTM();
@@ -72,6 +72,45 @@ long ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_
   return radiusCleanedArea;
 }
 
-double ServiceCleaners::calcImprovementAirQuality(long latitude, long longitude)
+/*
+  User Input: Coordinate(latitude, longitude), time(start timestamp, end timestamp)
+  Output: returns a vector pair<string, double>, with the attribute ID and unit
+*/
+vector<pair<string, double>> ServiceCleaners::calcImprovementAirQuality(double latitude, double longitude, struct tm *startTM, struct tm *endTM, vector<Sensor *> sensor_list)
 {
+  // Sort the sensors by distance from coordinate, get the closest one
+  vector<Sensor *> sensor_list_by_distance(sensor_list);
+  for (auto it : sensor_list_by_distance)
+  {
+    it->calcDistanceFromCoordinate(latitude, longitude);
+  }
+  sort(sensor_list_by_distance.begin(), sensor_list_by_distance.end(), cmpSensor);
+  Sensor *closest_sensor = sensor_list_by_distance[0];
+
+  // Get the attribute list of a measurement closet to the two timestamps
+  vector<Measurement *> measurement_list;
+  measurement_list = closest_sensor->getMeasurement();
+  Measurement *dummyStartTM = new Measurement(startTM);
+  Measurement *dummyEndTM = new Measurement(startTM);
+  vector<Attribute *> attributeListStartTM = (*lower_bound(measurement_list.begin(), measurement_list.end(), dummyStartTM, cmpMeasurementByTM))->getAttributeList();
+  vector<Attribute *> attributeListEndTM = (*upper_bound(measurement_list.begin(), measurement_list.end(), dummyEndTM, cmpMeasurementByTM))->getAttributeList();
+
+  // Compare the two attributes by id
+  vector<pair<string, double>> airQualityImprovement;
+  double difference;
+  for (int i = 0; i < attributeListStartTM.size(); i++)
+  {
+    string unitStartTM = attributeListStartTM[i]->getId();
+    for (int j = 0; j < attributeListEndTM.size(); j++)
+    {
+      string unitEndTM = attributeListEndTM[j]->getId();
+      if (unitStartTM == unitEndTM)
+      {
+        difference = stod(attributeListStartTM[i]->getUnit()) - stod(attributeListEndTM[j]->getUnit());
+        airQualityImprovement.push_back(make_pair(unitStartTM, difference));
+      }
+    }
+  }
+
+  return airQualityImprovement;
 }
