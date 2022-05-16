@@ -24,6 +24,7 @@ public:
   struct tm *getTimestamp();
   double getValue();
   vector<Attribute *> getAttributeList();
+  void printInfo();
 };
 
 #endif

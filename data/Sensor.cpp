@@ -37,3 +37,14 @@ double Sensor::getLongitude() { return longitude; }
 long Sensor::getReliability() { return reliability; }
 vector<Measurement *> Sensor::getMeasurement() { return measurement_list; }
 double Sensor::getDistanceFromCoordinate() { return distance_from_coordinate; }
+
+void Sensor::printInfo()
+{
+  std::printf("<--Sensor Info Start-->\n");
+  std::printf("Id: ", to_string(id), "\n");
+  std::printf("Lat, Long: ", to_string(latitude), to_string(longitude), "\n");
+  std::printf("Reliability: ", to_string(reliability), "\n");
+  std::printf("Distance From Coordinate: ", to_string(distance_from_coordinate), "\n");
+  std::printf("Number of Measurements: ", to_string(getMeasurement().size()), "\n");
+  std::printf("<-- Sensor Info End -->\n\n");
+}

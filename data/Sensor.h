@@ -30,6 +30,7 @@ public:
   long getReliability();
   vector<Measurement *> getMeasurement();
   double getDistanceFromCoordinate();
+  void printInfo();
 };
 
 #endif

@@ -22,6 +22,7 @@ public:
   string getId();
   string getUnit();
   string getDescription();
+  void printInfo();
 };
 
 #endif
