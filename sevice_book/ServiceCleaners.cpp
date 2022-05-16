@@ -6,7 +6,7 @@
 #include "../data/Measurement.h"
 #include "../data/Attribute.h"
 
-void ServiceCleaners::provide_cleaner(Provider *p, Cleaner *c)
+void ServiceCleaners::provideCleaner(Provider *p, Cleaner *c)
 {
   p->addCleaner(c);
   c->setProvider(p);
@@ -14,7 +14,7 @@ void ServiceCleaners::provide_cleaner(Provider *p, Cleaner *c)
 
 bool cmpSensor(Sensor *a, Sensor *b)
 {
-  return a->getDistanceFromCleaner() > b->getDistanceFromCleaner();
+  return a->getDistanceFromCoordinate() > b->getDistanceFromCoordinate();
 }
 
 bool cmpMeasurementByTM(Measurement *a, Measurement *b)
@@ -24,7 +24,7 @@ bool cmpMeasurementByTM(Measurement *a, Measurement *b)
 
 // Return Radius cleaned by cleaners
 // Needs the whole sensor* vector list as input
-long ServiceCleaners::calc_radius_cleaned_area(Cleaner *c, vector<Sensor *> sensor_list)
+long ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list)
 {
   struct tm *startTM = c->getStartTM();
   struct tm *endTM = c->getEndTM();
@@ -40,7 +40,7 @@ long ServiceCleaners::calc_radius_cleaned_area(Cleaner *c, vector<Sensor *> sens
   // Sort the sensors by distance from cleaner
   for (auto it : sensor_list_by_distance)
   {
-    it->calculate_distance_from_cleaner(latitude, longitude);
+    it->calcDistanceFromCoordinate(latitude, longitude);
   }
   sort(sensor_list_by_distance.begin(), sensor_list_by_distance.end(), cmpSensor);
 
@@ -66,12 +66,12 @@ long ServiceCleaners::calc_radius_cleaned_area(Cleaner *c, vector<Sensor *> sens
         improvedAttributeCnt++;
     }
     if (attributeListStartTM.size() == improvedAttributeCnt)
-      radiusCleanedArea = sensor_it->getDistanceFromCleaner();
+      radiusCleanedArea = sensor_it->getDistanceFromCoordinate();
   }
 
   return radiusCleanedArea;
 }
 
-double ServiceCleaners::calc_improvement_airQuality(long latitude, long longitude)
+double ServiceCleaners::calcImprovementAirQuality(long latitude, long longitude)
 {
 }

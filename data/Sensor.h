@@ -11,7 +11,7 @@ protected:
   double latitude;
   double longitude;
   bool reliability;
-  double distance_from_cleaner;
+  double distance_from_coordinate;
   vector<Measurement *> measurement_list;
 
 public:
@@ -22,14 +22,14 @@ public:
   void setLongitude(double longitude);
   void setReliability(bool reliability);
   void addMeasurement(Measurement *measurement);
-  void calculate_distance_from_cleaner(double latitude, double longitude);
+  void calcDistanceFromCoordinate(double latitude, double longitude);
 
   long getId();
   double getLatitude();
   double getLongitude();
   long getReliability();
   vector<Measurement *> getMeasurement();
-  double getDistanceFromCleaner();
+  double getDistanceFromCoordinate();
 };
 
 #endif

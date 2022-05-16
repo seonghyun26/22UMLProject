@@ -6,9 +6,9 @@
 class ServiceCleaners
 {
 public:
-  void provide_cleaner(Provider *p, Cleaner *c);
-  long calc_radius_cleaned_area(Cleaner *c, vector<Sensor *> sensor_list);
-  double calc_improvement_airQuality(long latitude, long longitude);
+  void provideCleaner(Provider *p, Cleaner *c);
+  long calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list);
+  double calcImprovementAirQuality(long latitude, long longitude);
 };
 
 #endif
