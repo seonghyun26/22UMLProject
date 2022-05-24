@@ -11,13 +11,6 @@
 
 using namespace std;
 
-string userTypeDic[4] = {
-    "Administrator",
-    "Provider",
-    "User",
-    "Government Agent",
-};
-
 Login::Login()
 {
   User *admin = new User(ADMIN_ID, ADMIN_ID, PW, 0);
@@ -28,6 +21,13 @@ Login::Login()
   userList.push_back(simpleUser);
   User *gov = new User(GOV_ID, GOV_ID, PW, 3);
   userList.push_back(gov);
+  currentUserLogin = "asdf";
+  currentUserType = 0;
+
+  // TODO: not now..
+  // adminFunction.insert(adminFunction.begin(), providerFunction.begin(), providerFunction.end());
+  // adminFunction.insert(adminFunction.end(), cleanerFunction.begin(), cleanerFunction.end());
+  // adminFunction.insert(adminFunction.end(), govFunction.begin(), govFunction.end());
 }
 
 /*
@@ -74,7 +74,9 @@ void Login::check()
 
 void Login::menu(int userType)
 {
-  string cmd, exit_yn;
+  string cmd;
+  int funcNum;
+
   while (1)
   {
     cout << "\nYou are [ " << userTypeDic[userType] << " ]\n";
@@ -83,29 +85,30 @@ void Login::menu(int userType)
 
     if (cmd == "exit" || cmd == "quit" || cmd == "q")
     {
-      cout << "Do you really want to exit Air Watcher? (y/n) ";
-      cin >> exit_yn;
-      if (exit_yn == "y")
-      {
-        cout << "Thank you\n";
-        break;
-      }
-      else if (exit_yn == "n")
-        continue;
-      else
-        cout << "Invalid Input. Returning to Menu\n";
+      break;
+      // cout << "Do you really want to exit Air Watcher? (y/n) ";
+      // cin >> exit_yn;
+      // if (exit_yn == "y")
+      // {
+      //   cout << "Thank you\n";
+      //   break;
+      // }
+      // else if (exit_yn == "n")
+      //   continue;
+      // else
+      //   cout << "Invalid Input. Returning to Menu\n";
     }
-    else if (cmd == "help")
+    else if (cmd == "help" || cmd == "h")
     {
+      printFunctionList(userType);
+      cout << " Type 'func' of 'f' to use one\n";
     }
-    else if (cmd == "")
+    else if (cmd == "func" || cmd == "f")
     {
-    }
-    else if (cmd == "")
-    {
-    }
-    else if (cmd == "")
-    {
+      printFunctionList(userType);
+      cout << "Function you want to execute: ";
+      cin >> funcNum;
+      executeUserFunction(userType, funcNum);
     }
     else
     {
@@ -115,8 +118,52 @@ void Login::menu(int userType)
   }
 }
 
-void Login::add(string new_id, string new_pw, int new_type)
+void Login::addUser(string new_id, string new_pw, int new_type)
 {
   User new_user = User(new_id, new_id, new_pw, new_type);
   userList.push_back(&new_user);
+}
+
+void Login::printFunctionList(int userType)
+{
+  cout << " List of functions you can use: \n";
+  for (int i = 0; i < functionList[userType].size(); i++)
+  {
+    cout << " - " << i << ": " << functionList[userType][i] << "\n";
+  }
+}
+
+void Login::executeUserFunction(int userType, int funcNum)
+{
+  int size = functionList[userType].size();
+  if (funcNum < 0 || funcNum >= size)
+  {
+    cout << "Invalid Function Number\n";
+    return;
+  }
+
+  // Map function number with class methods in data/User,GovAgent, ...
+  switch (userType)
+  {
+  // ADMIN
+  case 0:
+    break;
+
+  // Provider
+  case 1:
+    break;
+
+  // Cleaner
+  case 2:
+    break;
+
+  // Government Agent
+  case 3:
+    break;
+
+  default:
+    break;
+  }
+
+  return;
 }
