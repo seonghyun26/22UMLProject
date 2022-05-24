@@ -1,6 +1,9 @@
 #include "Measurement.h"
 #include <string.h>
 #include <time.h>
+#include <iostream>
+
+using namespace std;
 
 Measurement::Measurement(struct tm timestamp_)
 {
@@ -24,11 +27,9 @@ vector<Attribute *> Measurement::getAttributeList() { return attribute_list; }
 
 void Measurement::printInfo()
 {
-  std::printf("<--Measurement Info Start-->\n");
-  char buf[80];
+  cout << "<--Measurement Info Start-->\n";
   // strftime(buf, 80, "TimeStamp: %F %t", timestamp);
-  puts(buf);
-  std::printf("Value: ", to_string(value), "\n");
-  std::printf("Number of Attributes: ", to_string(getAttributeList().size()), "\n");
-  std::printf("<-- Measurement Info End -->\n\n");
+  cout << "Value: " << value << "\n";
+  cout << "Number of Attributes: " << getAttributeList().size() << "\n";
+  cout << "<-- Measurement Info End -->\n\n";
 }

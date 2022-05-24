@@ -10,7 +10,8 @@ class Login
 {
 public:
   Login();
-  int check();
+  void check();
+  void menu(int userType);
   void add(string new_id, string new_pw, int new_type);
 
 protected:
