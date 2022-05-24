@@ -3,11 +3,16 @@
 #include "interface/Login.h"
 #include "DAO/AttributesDAO.h"
 #include "DAO/ProviderDAO.h"
+#include "TESTS/TestDAO.h"
+#include "TESTS/TestSevice.h"
 
 int main()
 {
   cout << "	AIR WATCHER	\n";
 
+	// TEST
+	testAllDAO();
+	testAllService();
   // INITIALIZATION
   AttributesDAO daoAttr = AttributesDAO();
   daoAttr.parseAttributes("csv/attributes.csv");

@@ -1,9 +1,14 @@
-main: main.cpp build/AttributesDAO.o build/ProviderDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o build/Login.o
+main: main.cpp build/TestDAO.o build/TestService.o build/AttributesDAO.o build/ProviderDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o build/Login.o
 	g++ main.cpp build/*.o -o app
 
 clean:
 	rm build/* app
 
+#TESTS
+build/TestDAO.o: TESTS/TestDAO.cpp
+	g++ -c TESTS/TestDAO.cpp -o build/TestDAO.o
+build/TestService.o: TESTS/TestSevice.cpp
+	g++ -c TESTS/TestSevice.cpp -o build/TestService.o
 #DAO
 build/AttributesDAO.o: DAO/AttributesDAO.cpp
 	g++ -c DAO/AttributesDAO.cpp -o build/AttributesDAO.o
