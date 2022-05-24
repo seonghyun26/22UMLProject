@@ -19,15 +19,15 @@ bool cmpSensor(Sensor *a, Sensor *b)
 
 bool cmpMeasurementByTM(Measurement *a, Measurement *b)
 {
-  return mktime(a->getTimestamp()) > mktime(b->getTimestamp());
+  return mktime(&a->getTimestamp()) > mktime(&b->getTimestamp());
 }
 
 // Return Radius cleaned by cleaners
 // Needs the whole sensor* vector list as input
 double ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list)
 {
-  struct tm *startTM = c->getStartTM();
-  struct tm *endTM = c->getEndTM();
+  struct tm startTM = c->getStartTM();
+  struct tm endTM = c->getEndTM();
   double latitude = c->getLatitude();
   double longitude = c->getLongitude();
   double radiusCleanedArea = 0;
@@ -76,7 +76,7 @@ double ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> senso
   User Input: Coordinate(latitude, longitude), time(start timestamp, end timestamp)
   Output: returns a vector pair<string, double>, with the attribute ID and unit
 */
-vector<pair<string, double>> ServiceCleaners::calcImprovementAirQuality(double latitude, double longitude, struct tm *startTM, struct tm *endTM, vector<Sensor *> sensor_list)
+vector<pair<string, double>> ServiceCleaners::calcImprovementAirQuality(double latitude, double longitude, struct tm startTM, struct tm endTM, vector<Sensor *> sensor_list)
 {
   // Sort the sensors by distance from coordinate, get the closest one
   vector<Sensor *> sensor_list_by_distance(sensor_list);
