@@ -4,8 +4,8 @@ main: main.cpp build/AttributesDAO.o build/ProviderDAO.o build/Attribute.o build
 #DAO
 build/AttributesDAO.o: DAO/AttributesDAO.cpp
 	g++ -c DAO/AttributesDAO.cpp -o build/AttributesDAO.o
-build/AttributesDAO.o: DAO/ProviderDAO.cpp
-	g++ -c DAO/AttributesDAO.cpp -o build/ProviderDAO.o
+build/ProviderDAO.o: DAO/ProviderDAO.cpp
+	g++ -c DAO/ProviderDAO.cpp -o build/ProviderDAO.o
 
 #data
 build/Attribute.o: data/Attribute.cpp
