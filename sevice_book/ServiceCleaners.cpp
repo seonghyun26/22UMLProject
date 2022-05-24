@@ -19,7 +19,7 @@ bool cmpSensor(Sensor *a, Sensor *b)
 
 bool cmpMeasurementByTM(Measurement *a, Measurement *b)
 {
-  return mktime(&a->getTimestamp()) > mktime(&b->getTimestamp());
+  return mktime(a->getTimestampAddress()) > mktime(b->getTimestampAddress());
 }
 
 // Return Radius cleaned by cleaners

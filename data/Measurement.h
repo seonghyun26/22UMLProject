@@ -22,6 +22,7 @@ public:
   void addAttribute(Attribute *attribute);
 
   struct tm getTimestamp();
+  struct tm *getTimestampAddress();
   double getValue();
   vector<Attribute *> getAttributeList();
   void printInfo();

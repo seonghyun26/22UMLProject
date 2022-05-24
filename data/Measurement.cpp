@@ -18,6 +18,7 @@ void Measurement::setValue(double value) { this->value = value; }
 void Measurement::addAttribute(Attribute *attribute) { this->attribute_list.push_back(attribute); }
 
 struct tm Measurement::getTimestamp() { return timestamp; }
+struct tm *Measurement::getTimestampAddress() { return &timestamp; }
 double Measurement::getValue() { return value; }
 vector<Attribute *> Measurement::getAttributeList() { return attribute_list; }
 
