@@ -1,4 +1,4 @@
-main: main.cpp build/AttributesDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o
+main: main.cpp build/AttributesDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o build/Login.o
 	g++ main.cpp build/*.o -o app
 
 #DAO
@@ -41,3 +41,5 @@ build/ServiceGovernement.o: sevice_book/ServiceGovernement.cpp
 	g++ -c sevice_book/ServiceGovernement.cpp -o build/ServiceGovernement.o
 
 #user_interface
+build/Login.o: interface/Login.cpp
+	g++ -c interface/Login.cpp -o build/Login.o
