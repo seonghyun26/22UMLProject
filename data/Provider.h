@@ -17,6 +17,7 @@ public:
 	Provider(string id, string login, string password);
   vector<Cleaner *> getCleaners() ;
   void addCleaner(Cleaner *cleaner) ;
+	//TODO proper deletion of cleaners
 };
 
 #endif
