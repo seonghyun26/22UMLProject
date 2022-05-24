@@ -2,6 +2,7 @@
 #define SERVICECLEANERS_H
 
 #include "../data/Cleaner.h"
+#include "../data/Sensor.h"
 #include <vector>
 
 class ServiceCleaners

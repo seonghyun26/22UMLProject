@@ -19,8 +19,8 @@ string Attribute::getDescription() { return description; }
 void Attribute::printInfo()
 {
   std::printf("<--Attribute Info Start-->\n");
-  std::printf("Id: ", id, "\n");
-  std::printf("Unit: ", unit, "\n");
-  std::printf("Description: ", description, "\n");
+  std::printf("Id: %s\n", id.c_str());
+  std::printf("Unit: %s\n", unit.c_str());
+  std::printf("Description: %s\n", description.c_str());
   std::printf("<-- Attribute Info End -->\n\n");
 }

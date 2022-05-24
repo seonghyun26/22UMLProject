@@ -2,7 +2,7 @@
 #include <cmath>
 #include <algorithm>
 
-bool cmpMeasurementByTM(Measurement *a, Measurement *b)
+bool sortMeasurementByTM(Measurement *a, Measurement *b)
 {
   return mktime(a->getTimestamp()) > mktime(b->getTimestamp());
 }
@@ -24,7 +24,7 @@ void Sensor::addMeasurement(Measurement *measurement)
 {
   this->measurement_list.push_back(measurement);
   // Sort measurement list by timestamp!
-  sort(this->getMeasurement().begin(), this->getMeasurement().end(), cmpMeasurementByTM);
+  sort(this->getMeasurement().begin(), this->getMeasurement().end(), sortMeasurementByTM);
 }
 void Sensor::calcDistanceFromCoordinate(double latitude, double longitude)
 {
@@ -41,10 +41,10 @@ double Sensor::getDistanceFromCoordinate() { return distance_from_coordinate; }
 void Sensor::printInfo()
 {
   std::printf("<--Sensor Info Start-->\n");
-  std::printf("Id: ", to_string(id), "\n");
-  std::printf("Lat, Long: ", to_string(latitude), to_string(longitude), "\n");
-  std::printf("Reliability: ", to_string(reliability), "\n");
-  std::printf("Distance From Coordinate: ", to_string(distance_from_coordinate), "\n");
-  std::printf("Number of Measurements: ", to_string(getMeasurement().size()), "\n");
+  std::printf("Id: %ld \n", id);
+  std::printf("Lat, Long: %f, %f\n", latitude, longitude);
+  std::printf("Reliability: %d\n", reliability);
+  std::printf("Distance From Coordinate: %f\n", distance_from_coordinate);
+  std::printf("Number of Measurements: %ld\n", getMeasurement().size());
   std::printf("<-- Sensor Info End -->\n\n");
 }
