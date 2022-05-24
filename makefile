@@ -1,6 +1,9 @@
 main: main.cpp build/AttributesDAO.o build/ProviderDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o build/Login.o
 	g++ main.cpp build/*.o -o app
 
+clean:
+	rm build/* app
+
 #DAO
 build/AttributesDAO.o: DAO/AttributesDAO.cpp
 	g++ -c DAO/AttributesDAO.cpp -o build/AttributesDAO.o
