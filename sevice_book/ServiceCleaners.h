@@ -2,13 +2,15 @@
 #define SERVICECLEANERS_H
 
 #include "../data/Cleaner.h"
+#include "../data/Sensor.h"
+#include <vector>
 
 class ServiceCleaners
 {
 public:
-  void provide_cleaner(Provider *p, Cleaner *c);
-  long calc_radius_cleaned_area(Cleaner *c);
-  double calc_improvement_airQuality(long latitude, long longitude);
+  void provideCleaner(Provider *p, Cleaner *c);
+  double calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list);
+  vector<pair<string, double>> calcImprovementAirQuality(double latitude, double longitude, struct tm *startTM, struct tm *endTM, vector<Sensor *> sensor_list);
 };
 
 #endif
