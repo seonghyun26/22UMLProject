@@ -58,7 +58,6 @@ void ProviderDAO::parseProviderAndCleaner(string providersPath,string cleanersPa
 		fs.getline(forgot,256);
 	}
 
-	fs.close();
 	fs.open (providersPath, fstream::in);
 	while(fs.getline(providerId,32,';') || strlen(providerId)!=0){
 		fs.getline(cleanerId,32,';');
@@ -69,9 +68,7 @@ void ProviderDAO::parseProviderAndCleaner(string providersPath,string cleanersPa
 		}
 		currentProvider= &providerList[providerById[providerId]];
 		currentCleaner= &cleanerList[cleanerById[cleanerId]];
-		currentCleaner->setProvider(currentProvider);
 		currentProvider->addCleaner(currentCleaner);
 		fs.getline(forgot,256);
 	}
-	fs.close();
 }
