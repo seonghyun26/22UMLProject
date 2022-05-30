@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include "../data/User.h"
+#include "./ProviderInterface.h"
+
 using namespace std;
 
 class Login
@@ -14,12 +16,11 @@ public:
   void menu(int userType);
   void addUser(string new_id, string new_pw, int new_type);
   void printFunctionList(int userType);
-  void executeUserFunction(int userType, int funcNum);
+  bool executeUserFunction(int userType, int funcNum);
 
 protected:
   vector<User *> userList;
-  string currentUserLogin;
-  int currentUserType;
+  ProviderInterface ProviderUI;
   string userTypeDic[4] = {
       "Administrator",
       "Provider",

@@ -2,6 +2,9 @@
 #include <iostream>
 #include "Login.h"
 #include "../data/User.h"
+#include "../data/Provider.h"
+#include "../data/Cleaner.h"
+#include "ProviderInterface.h"
 
 #define ADMIN_ID "asdf"
 #define PROV_ID "prov"
@@ -21,8 +24,6 @@ Login::Login()
   userList.push_back(simpleUser);
   User *gov = new User(GOV_ID, GOV_ID, PW, 3);
   userList.push_back(gov);
-  currentUserLogin = "asdf";
-  currentUserType = 0;
 
   // TODO: not now..
   // adminFunction.insert(adminFunction.begin(), providerFunction.begin(), providerFunction.end());
@@ -76,6 +77,7 @@ void Login::menu(int userType)
 {
   string cmd;
   int funcNum;
+  bool funcResult;
 
   while (1)
   {
@@ -84,36 +86,25 @@ void Login::menu(int userType)
     cin >> cmd;
 
     if (cmd == "exit" || cmd == "quit" || cmd == "q")
-    {
       break;
-      // cout << "Do you really want to exit Air Watcher? (y/n) ";
-      // cin >> exit_yn;
-      // if (exit_yn == "y")
-      // {
-      //   cout << "Thank you\n";
-      //   break;
-      // }
-      // else if (exit_yn == "n")
-      //   continue;
-      // else
-      //   cout << "Invalid Input. Returning to Menu\n";
-    }
     else if (cmd == "help" || cmd == "h")
     {
-      printFunctionList(userType);
-      cout << " Type 'func' of 'f' to use one\n";
+      cout << "help, h        Information about available commands\n";
+      cout << "func, f        Execute a function\n";
+      cout << "exit, quit, q  Quit Program\n";
     }
     else if (cmd == "func" || cmd == "f")
     {
       printFunctionList(userType);
       cout << "Function you want to execute: ";
       cin >> funcNum;
-      executeUserFunction(userType, funcNum);
+      funcResult = executeUserFunction(userType, funcNum);
+      cout << "Function execution " << (funcResult ? "Succeed" : "Failed") << "\n";
     }
     else
     {
       cout << "Invalid Command\n";
-      cout << "Type “help” for a list of available command\n";
+      cout << "Type “help” or h for a list of available command\n";
     }
   }
 }
@@ -133,15 +124,16 @@ void Login::printFunctionList(int userType)
   }
 }
 
-void Login::executeUserFunction(int userType, int funcNum)
+bool Login::executeUserFunction(int userType, int funcNum)
 {
   int size = functionList[userType].size();
   if (funcNum < 0 || funcNum >= size)
   {
     cout << "Invalid Function Number\n";
-    return;
+    return false;
   }
 
+  bool funcResult;
   // Map function number with class methods in data/User,GovAgent, ...
   switch (userType)
   {
@@ -151,6 +143,7 @@ void Login::executeUserFunction(int userType, int funcNum)
 
   // Provider
   case 1:
+    funcResult = ProviderUI.executeProviderFunction(funcNum);
     break;
 
   // Cleaner
@@ -165,5 +158,5 @@ void Login::executeUserFunction(int userType, int funcNum)
     break;
   }
 
-  return;
+  return funcResult;
 }
