@@ -7,6 +7,7 @@
 #include "./Interface.h"
 #include "./ProviderInterface.h"
 #include "./UserInterface.h"
+#include "./GovAgentInterface.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ protected:
   Interface *UI;
   ProviderInterface ProviderUI;
   UserInterface UserUI;
-  // GovAgentInterface GovAgentUI;
+  GovAgentInterface GovAgentUI;
 
 public:
   Login();

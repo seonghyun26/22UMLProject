@@ -82,6 +82,7 @@ void Login::menu(int userType)
     UI = &UserUI;
     break;
   case 3:
+    UI = &GovAgentUI;
     break;
   }
 
