@@ -4,7 +4,7 @@
 
 bool sortMeasurementByTM(Measurement *a, Measurement *b)
 {
-  return mktime(a->getTimestamp()) > mktime(b->getTimestamp());
+  return mktime(a->getTimestampAddress()) > mktime(b->getTimestampAddress());
 }
 
 Sensor::Sensor(int id_, double latitude_, double longitude_, bool reliability_)
