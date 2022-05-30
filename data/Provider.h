@@ -14,10 +14,10 @@ protected:
   vector<Cleaner *> cleaner_list;
 
 public:
-	Provider(string id, string login, string password);
-  vector<Cleaner *> getCleaners() ;
-  void addCleaner(Cleaner *cleaner) ;
-	//TODO proper deletion of cleaners
+  Provider(string id, string login, string password);
+  vector<Cleaner *> getCleaners();
+  bool addCleaner(Cleaner *cleaner);
+  // TODO: deletion of cleaners
 };
 
 #endif

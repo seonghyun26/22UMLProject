@@ -1,4 +1,4 @@
-main: main.cpp build/TestDAO.o build/TestService.o build/AttributesDAO.o build/ProviderDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o build/Login.o
+main: main.cpp build/TestDAO.o build/TestService.o build/AttributesDAO.o build/ProviderDAO.o build/Attribute.o build/Cleaner.o build/GovAgent.o build/Measurement.o build/Provider.o build/Sensor.o build/SimpleUser.o build/User.o build/ServiceCleaners.o build/ServiceGovernement.o build/ServiceGovernement.o build/Login.o build/Interface.o build/ProviderInterface.o build/UserInterface.o build/GovAgentInterface.o
 	g++ main.cpp build/*.o -o app
 
 clean:
@@ -53,3 +53,11 @@ build/ServiceGovernement.o: sevice_book/ServiceGovernement.cpp
 #user_interface
 build/Login.o: interface/Login.cpp
 	g++ -c interface/Login.cpp -o build/Login.o
+build/Interface.o: interface/Interface.cpp
+	g++ -c interface/Interface.cpp -o build/Interface.o
+build/ProviderInterface.o: interface/ProviderInterface.cpp
+	g++ -c interface/ProviderInterface.cpp -o build/ProviderInterface.o
+build/UserInterface.o: interface/UserInterface.cpp
+	g++ -c interface/UserInterface.cpp -o build/UserInterface.o
+build/GovAgentInterface.o: interface/GovAgentInterface.cpp
+	g++ -c interface/GovAgentInterface.cpp -o build/GovAgentInterface.o
