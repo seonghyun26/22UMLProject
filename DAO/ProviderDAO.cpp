@@ -71,4 +71,5 @@ void ProviderDAO::parseProviderAndCleaner(string providersPath,string cleanersPa
 		currentProvider->addCleaner(currentCleaner);
 		fs.getline(forgot,256);
 	}
+	fs.close();
 }
