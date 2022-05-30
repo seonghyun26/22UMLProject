@@ -6,6 +6,7 @@
 #include "../data/User.h"
 #include "./Interface.h"
 #include "./ProviderInterface.h"
+#include "./UserInterface.h"
 
 using namespace std;
 
@@ -14,12 +15,9 @@ class Login
 protected:
   vector<User *> userList;
   Interface *UI;
-  // UserInterface UserUI;
-  // GovAgentInterface GovAgentUI;
   ProviderInterface ProviderUI;
-  // vector<string> cleanerFunction = {"Provide Cleaner", "Calculate Cleaned Area", "Calculate Improvement Air Quality"};
-  // vector<string> govFunction = {"Calculate Air Quality Mean", "Calculate Air Quality At Position", "Rank Sensor",
-  //                               "Analyze Data Sensor", "Flag Unreliable", "Unflag", "Erase Data Unreliable Sensor"};
+  UserInterface UserUI;
+  // GovAgentInterface GovAgentUI;
 
 public:
   Login();

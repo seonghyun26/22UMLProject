@@ -79,6 +79,7 @@ void Login::menu(int userType)
     UI = &ProviderUI;
     break;
   case 2:
+    UI = &UserUI;
     break;
   case 3:
     break;

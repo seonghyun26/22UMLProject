@@ -11,7 +11,7 @@ extern vector<Cleaner> cleanerList;
 ProviderInterface::ProviderInterface() : Interface()
 {
   userType = "Provider";
-  functionNameList = {"Provide Sensor", "Give Reward"};
+  functionNameList = {"Provide Cleaner", "Calculate Cleaned Area", "Calculate Improvement Air Quality"};
 }
 
 bool ProviderInterface::executeFunction(int funcNum)
@@ -21,10 +21,13 @@ bool ProviderInterface::executeFunction(int funcNum)
   switch (funcNum)
   {
   case 0:
-    funcResult = provideSensor();
+    funcResult = provideCleaner();
     break;
   case 1:
-    // Give Reward
+    funcResult = calculateCleanedArea();
+    break;
+  case 2:
+    funcResult = calculateImprovementAQ();
     break;
   default:
     funcResult = false;
@@ -33,7 +36,7 @@ bool ProviderInterface::executeFunction(int funcNum)
   return funcResult;
 }
 
-bool ProviderInterface::provideSensor()
+bool ProviderInterface::provideCleaner()
 {
   int providerNum, cleanerNum;
 
@@ -77,4 +80,14 @@ bool ProviderInterface::provideSensor()
   Cleaner *cleaner = &(cleanerList[cleanerNum]);
 
   return provider->addCleaner(cleaner);
+}
+
+bool ProviderInterface::calculateCleanedArea()
+{
+  return false;
+}
+
+bool ProviderInterface::calculateImprovementAQ()
+{
+  return false;
 }

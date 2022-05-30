@@ -3,15 +3,15 @@
 
 #include "Interface.h"
 
-using namespace std;
-
 class ProviderInterface : public Interface
 {
 protected:
 public:
   ProviderInterface();
   bool executeFunction(int funcNum);
-  bool provideSensor();
+  bool provideCleaner();
+  bool calculateCleanedArea();
+  bool calculateImprovementAQ();
 };
 
 #endif
