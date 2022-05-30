@@ -1,20 +1,17 @@
-#ifndef PROVIDER_UI
-#define PROVIDER_UI
+#ifndef PROVIDER_UI_H
+#define PROVIDER_UI_H
 
-#include <vector>
-#include <string>
+#include "Interface.h"
 
 using namespace std;
 
-class ProviderInterface
+class ProviderInterface : public Interface
 {
-public:
-  vector<string> getProviderFunctionList() { return providerFunction; }
-  bool executeProviderFunction(int funcNum);
-  bool provideSensor();
-
 protected:
-  vector<string> providerFunction = {"Provide Sensor", "Give Reward"};
+public:
+  ProviderInterface();
+  bool executeFunction(int funcNum);
+  bool provideSensor();
 };
 
 #endif

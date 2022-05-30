@@ -8,19 +8,23 @@ using namespace std;
 extern vector<Provider> providerList;
 extern vector<Cleaner> cleanerList;
 
-bool ProviderInterface::executeProviderFunction(int funcNum)
+ProviderInterface::ProviderInterface() : Interface()
+{
+  userType = "Provider";
+  functionNameList = {"Provide Sensor", "Give Reward"};
+}
+
+bool ProviderInterface::executeFunction(int funcNum)
 {
   bool funcResult = true;
 
   switch (funcNum)
   {
-  // Provide Sensor
   case 0:
     funcResult = provideSensor();
     break;
-
-  // Give Reward
   case 1:
+    // Give Reward
     break;
   default:
     funcResult = false;
@@ -42,9 +46,7 @@ bool ProviderInterface::provideSensor()
   cout << "List of Providers\n";
   cout << "-- -- -- -- -- -- --\n";
   for (int i = 0; i < providerList.size(); i++)
-  {
     cout << "- " << i << ": " << providerList[i].getId() << "\n";
-  }
   cout << "-- -- -- -- -- -- --\n";
   cout << "Type Provider Number: ";
   cin >> providerNum;
@@ -63,9 +65,7 @@ bool ProviderInterface::provideSensor()
   cout << "List of Cleaners\n";
   cout << "-- -- -- -- -- -- --\n";
   for (int i = 0; i < cleanerList.size(); i++)
-  {
     cout << "- " << i << ": " << cleanerList[i].getId() << "\n";
-  }
   cout << "-- -- -- -- -- -- --\n";
   cout << "Type Cleaner Number: ";
   cin >> cleanerNum;

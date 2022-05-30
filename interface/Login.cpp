@@ -24,11 +24,6 @@ Login::Login()
   userList.push_back(simpleUser);
   User *gov = new User(GOV_ID, GOV_ID, PW, 3);
   userList.push_back(gov);
-
-  // TODO: not now..
-  // adminFunction.insert(adminFunction.begin(), providerFunction.begin(), providerFunction.end());
-  // adminFunction.insert(adminFunction.end(), cleanerFunction.begin(), cleanerFunction.end());
-  // adminFunction.insert(adminFunction.end(), govFunction.begin(), govFunction.end());
 }
 
 /*
@@ -63,13 +58,10 @@ void Login::check()
       }
     }
 
-    if (userType == -1)
-    {
-      cout << "Doesn't Exist. Try Again.\n";
-      continue;
-    }
-    else
+    if (userType >= 0 && userType <= 3)
       menu(userType);
+    else
+      cout << " User Doesn't Exist..\n";
   }
 }
 
@@ -79,33 +71,48 @@ void Login::menu(int userType)
   int funcNum;
   bool funcResult;
 
+  switch (userType)
+  {
+  case 0:
+    break;
+  case 1:
+    UI = &ProviderUI;
+    break;
+  case 2:
+    break;
+  case 3:
+    break;
+  }
+
   while (1)
   {
-    cout << "\nYou are [ " << userTypeDic[userType] << " ]\n";
+    UI->printUserType();
     cout << ">> ";
     cin >> cmd;
 
     if (cmd == "exit" || cmd == "quit" || cmd == "q")
       break;
+
     else if (cmd == "help" || cmd == "h")
     {
       cout << "help, h        Information about available commands\n";
       cout << "func, f        Execute a function\n";
       cout << "exit, quit, q  Quit Program\n";
     }
+
     else if (cmd == "func" || cmd == "f")
     {
-      printFunctionList(userType);
-      cout << "Function you want to execute: ";
-      cin >> funcNum;
-      funcResult = executeUserFunction(userType, funcNum);
+      funcNum = UI->chooseFunction();
+      if (funcNum == -1)
+      {
+        cout << "Invalid Function Number\n";
+        continue;
+      }
+      funcResult = UI->executeFunction(funcNum);
       cout << "Function execution " << (funcResult ? "Succeed" : "Failed") << "\n";
     }
     else
-    {
-      cout << "Invalid Command\n";
-      cout << "Type “help” or h for a list of available command\n";
-    }
+      cout << "Invalid Command\nType “help” or 'h' to see what you can do!\n";
   }
 }
 
@@ -113,50 +120,4 @@ void Login::addUser(string new_id, string new_pw, int new_type)
 {
   User new_user = User(new_id, new_id, new_pw, new_type);
   userList.push_back(&new_user);
-}
-
-void Login::printFunctionList(int userType)
-{
-  cout << " List of functions you can use: \n";
-  for (int i = 0; i < functionList[userType].size(); i++)
-  {
-    cout << " - " << i << ": " << functionList[userType][i] << "\n";
-  }
-}
-
-bool Login::executeUserFunction(int userType, int funcNum)
-{
-  int size = functionList[userType].size();
-  if (funcNum < 0 || funcNum >= size)
-  {
-    cout << "Invalid Function Number\n";
-    return false;
-  }
-
-  bool funcResult;
-  // Map function number with class methods in data/User,GovAgent, ...
-  switch (userType)
-  {
-  // ADMIN
-  case 0:
-    break;
-
-  // Provider
-  case 1:
-    funcResult = ProviderUI.executeProviderFunction(funcNum);
-    break;
-
-  // Cleaner
-  case 2:
-    break;
-
-  // Government Agent
-  case 3:
-    break;
-
-  default:
-    break;
-  }
-
-  return funcResult;
 }
