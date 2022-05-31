@@ -138,12 +138,6 @@ bool ProviderInterface::calculateImprovementAQ()
   cout << "> End TM(YYYY-MM-DD HH:MM:SS): ";
   cin >> std::get_time(&endTM, "%Y-%m-%d %H:%M:%S");
 
-  if (sensorList.size() == 0)
-  {
-    cout << "No Sensors in List\n";
-    return false;
-  }
-
   vector<pair<string, double>> result = serviceCleaner->calcImprovementAirQuality(
       latitude, longitude,
       startTM, endTM,
@@ -151,7 +145,7 @@ bool ProviderInterface::calculateImprovementAQ()
 
   for (auto it : result)
   {
-    cout << "Attribute " << it.first << " Improvment : " << it.second << "\n";
+    cout << "Attribute '" << it.first << "' Improvment : " << it.second << "\n";
   }
 
   return false;

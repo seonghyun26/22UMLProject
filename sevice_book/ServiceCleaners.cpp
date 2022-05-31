@@ -88,6 +88,15 @@ vector<pair<string, double>> ServiceCleaners::calcImprovementAirQuality(double l
 {
   // Sort the sensors by distance from coordinate, get the closest one
   vector<Sensor *> sensor_list_by_distance(sensor_list);
+  vector<pair<string, double>> airQualityImprovement;
+
+  if (sensor_list_by_distance.size() == 0)
+  {
+    cout << "No Sensors in List\n";
+    airQualityImprovement.push_back(make_pair("NULL", 0));
+    return airQualityImprovement;
+  }
+
   for (auto it : sensor_list_by_distance)
   {
     it->calcDistanceFromCoordinate(latitude, longitude);
@@ -104,7 +113,6 @@ vector<pair<string, double>> ServiceCleaners::calcImprovementAirQuality(double l
   vector<Attribute *> attributeListEndTM = (*upper_bound(measurement_list.begin(), measurement_list.end(), dummyEndTM, cmpMeasurementByTM))->getAttributeList();
 
   // Compare the two attributes by id
-  vector<pair<string, double>> airQualityImprovement;
   double difference;
   for (int i = 0; i < attributeListStartTM.size(); i++)
   {
