@@ -1,15 +1,18 @@
 #include <ctime>
 #include <algorithm>
 #include <string>
+#include <iostream>
 #include "ServiceCleaners.h"
 #include "../data/Sensor.h"
 #include "../data/Measurement.h"
 #include "../data/Attribute.h"
 
-void ServiceCleaners::provideCleaner(Provider *p, Cleaner *c)
+bool ServiceCleaners::provideCleaner(Provider *p, Cleaner *c)
 {
-  p->addCleaner(c);
+  bool funcResult;
+  funcResult = p->addCleaner(c);
   c->setProvider(p);
+  return funcResult;
 }
 
 bool cmpSensor(Sensor *a, Sensor *b)
@@ -38,6 +41,11 @@ double ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> senso
   vector<Attribute *> attributeListEndTM;
 
   // Sort the sensors by distance from cleaner
+  if (sensor_list_by_distance.size() == 0)
+  {
+    cout << "No Sensors in List\n";
+    return -1;
+  }
   for (auto it : sensor_list_by_distance)
   {
     it->calcDistanceFromCoordinate(latitude, longitude);

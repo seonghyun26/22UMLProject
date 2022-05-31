@@ -6,13 +6,16 @@
 #include "TESTS/TestDAO.h"
 #include "TESTS/TestSevice.h"
 
+#include "./data/Sensor.h"
+vector<Sensor *> sensorList;
+
 int main()
 {
   cout << "	AIR WATCHER	\n";
 
-	// TEST
-	testAllDAO();
-	testAllService();
+  // TEST
+  testAllDAO();
+  testAllService();
   // INITIALIZATION
   AttributesDAO daoAttr = AttributesDAO();
   daoAttr.parseAttributes("csv/attributes.csv");

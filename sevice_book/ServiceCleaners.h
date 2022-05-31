@@ -8,7 +8,7 @@
 class ServiceCleaners
 {
 public:
-  void provideCleaner(Provider *p, Cleaner *c);
+  bool provideCleaner(Provider *p, Cleaner *c);
   double calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list);
   vector<pair<string, double>> calcImprovementAirQuality(double latitude, double longitude, struct tm startTM, struct tm endTM, vector<Sensor *> sensor_list);
 };

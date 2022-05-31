@@ -2,16 +2,19 @@
 #include "ProviderInterface.h"
 #include "../data/Provider.h"
 #include "../data/Cleaner.h"
+#include "../sevice_book/ServiceCleaners.h"
 
 using namespace std;
 
 extern vector<Provider> providerList;
 extern vector<Cleaner> cleanerList;
+extern vector<Sensor *> sensorList;
 
 ProviderInterface::ProviderInterface() : Interface()
 {
   userType = "Provider";
   functionNameList = {"Provide Cleaner", "Calculate Cleaned Area", "Calculate Improvement Air Quality"};
+  serviceCleaner = new ServiceCleaners();
 }
 
 bool ProviderInterface::executeFunction(int funcNum)
@@ -36,58 +39,89 @@ bool ProviderInterface::executeFunction(int funcNum)
   return funcResult;
 }
 
-bool ProviderInterface::provideCleaner()
+Provider *ProviderInterface::selectProvider()
 {
-  int providerNum, cleanerNum;
+  int providerNum;
 
-  // Choose provider, cleaner from list
   if (providerList.size() == 0)
   {
     cout << "No Providers Exist\n";
-    return false;
+    return NULL;
   }
+
   cout << "List of Providers\n";
   cout << "-- -- -- -- -- -- --\n";
   for (int i = 0; i < providerList.size(); i++)
-    cout << "- " << i << ": " << providerList[i].getId() << "\n";
+    cout << "- " << i << ": " << providerList[i].getId() << ", " << providerList[i].getCleaners().size() << " cleaners\n";
   cout << "-- -- -- -- -- -- --\n";
   cout << "Type Provider Number: ";
   cin >> providerNum;
+
   if (providerNum < 0 || providerNum > providerList.size())
   {
     cout << "Invalid Input!\n";
-    return false;
+    return NULL;
   }
-  Provider *provider = &(providerList[providerNum]);
+
+  return &(providerList[providerNum]);
+}
+
+Cleaner *ProviderInterface::selectCleaner()
+{
+  int cleanerNum;
 
   if (cleanerList.size() == 0)
   {
     cout << "No Providers Exist\n";
-    return false;
+    return NULL;
   }
+
   cout << "List of Cleaners\n";
   cout << "-- -- -- -- -- -- --\n";
   for (int i = 0; i < cleanerList.size(); i++)
-    cout << "- " << i << ": " << cleanerList[i].getId() << "\n";
+    cout << "- " << i << ": " << cleanerList[i].getId() << " ( lat: " << cleanerList[i].getLatitude() << ", long: " << cleanerList[i].getLongitude() << " )\n";
   cout << "-- -- -- -- -- -- --\n";
   cout << "Type Cleaner Number: ";
   cin >> cleanerNum;
+
   if (cleanerNum < 0 || cleanerNum >= cleanerList.size())
   {
     cout << "Invalid Input!\n";
-    return false;
+    return NULL;
   }
-  Cleaner *cleaner = &(cleanerList[cleanerNum]);
+  return &(cleanerList[cleanerNum]);
+}
 
-  return provider->addCleaner(cleaner);
+bool ProviderInterface::provideCleaner()
+{
+  // Choose provider, cleaner
+  Provider *provider = selectProvider();
+  if (provider == NULL)
+    return false;
+  Cleaner *cleaner = selectCleaner();
+  if (cleaner == NULL)
+    return false;
+
+  return serviceCleaner->provideCleaner(provider, cleaner);
 }
 
 bool ProviderInterface::calculateCleanedArea()
 {
-  return false;
+  // Choose Cleaner
+  Cleaner *cleaner = selectCleaner();
+  if (cleaner == NULL)
+    return false;
+  // cout << "FLAG\n";
+
+  double radiusCleanedArea = serviceCleaner->calcRadiusCleanedArea(cleaner, sensorList);
+  cout << "=> Radius of Cleaned Area: " << radiusCleanedArea << "\n";
+  return radiusCleanedArea < 0 ? false : true;
 }
 
 bool ProviderInterface::calculateImprovementAQ()
 {
+  double latitude, longitude;
+  struct tm startTM, endTM;
+
   return false;
 }

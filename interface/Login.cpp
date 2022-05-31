@@ -111,7 +111,7 @@ void Login::menu(int userType)
         continue;
       }
       funcResult = UI->executeFunction(funcNum);
-      cout << "Function execution " << (funcResult ? "Succeed" : "Failed") << "\n";
+      cout << " -- Function execution " << (funcResult ? "Succeed" : "Failed") << " -- \n";
     }
     else
       cout << "Invalid Command\nType “help” or 'h' to see what you can do!\n";
