@@ -14,6 +14,7 @@ public:
   bool executeFunction(int funcNum);
   Provider *selectProvider();
   Cleaner *selectCleaner();
+  void strToTM(string *str, struct tm *tm);
   bool provideCleaner();
   bool calculateCleanedArea();
   bool calculateImprovementAQ();

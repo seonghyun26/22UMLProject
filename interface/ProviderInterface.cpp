@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <iomanip>
 #include "ProviderInterface.h"
 #include "../data/Provider.h"
 #include "../data/Cleaner.h"
@@ -92,6 +94,10 @@ Cleaner *ProviderInterface::selectCleaner()
   return &(cleanerList[cleanerNum]);
 }
 
+void ProviderInterface::strToTM(string *str, struct tm *tm)
+{
+}
+
 bool ProviderInterface::provideCleaner()
 {
   // Choose provider, cleaner
@@ -122,6 +128,31 @@ bool ProviderInterface::calculateImprovementAQ()
 {
   double latitude, longitude;
   struct tm startTM, endTM;
+
+  cout << "> Latitude: ";
+  cin >> latitude;
+  cout << "> Longitude: ";
+  cin >> longitude;
+  cout << "> Start TM(YYYY-MM-DD HH:MM:SS): ";
+  cin >> std::get_time(&startTM, "%Y-%m-%d %H:%M:%S");
+  cout << "> End TM(YYYY-MM-DD HH:MM:SS): ";
+  cin >> std::get_time(&endTM, "%Y-%m-%d %H:%M:%S");
+
+  if (sensorList.size() == 0)
+  {
+    cout << "No Sensors in List\n";
+    return false;
+  }
+
+  vector<pair<string, double>> result = serviceCleaner->calcImprovementAirQuality(
+      latitude, longitude,
+      startTM, endTM,
+      sensorList);
+
+  for (auto it : result)
+  {
+    cout << "Attribute " << it.first << " Improvment : " << it.second << "\n";
+  }
 
   return false;
 }
