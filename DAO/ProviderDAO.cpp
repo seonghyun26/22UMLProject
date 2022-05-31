@@ -64,7 +64,7 @@ void ProviderDAO::parseProviderAndCleaner(string providersPath,string cleanersPa
 		if(providerById.count(providerId)==0){
 			providerById.insert(pair<string,int>(providerId,providerList.size()));
 																								//login and password not initialized because absent from the original csv file
-			providerList.push_back(Provider(providerId,providerId,""));
+			providerList.push_back(Provider(providerId,providerId,"1234"));
 		}
 		currentProvider= &providerList[providerById[providerId]];
 		currentCleaner= &cleanerList[cleanerById[cleanerId]];
