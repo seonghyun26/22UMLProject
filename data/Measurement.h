@@ -10,7 +10,7 @@ class Measurement
 protected:
   struct tm timestamp;
   double value;
-  vector<Attribute *> attribute_list;
+  Attribute *attribute;
 
 public:
   Measurement(struct tm timestamp_);
@@ -19,12 +19,12 @@ public:
   void setTimestamp(struct tm timestamp);
   // strptime(timestamp_str, "%Y-%Om-%Od %OH:%OM:%OS", this->timestamp)
   void setValue(double value);
-  void addAttribute(Attribute *attribute);
+  void setAttribute(Attribute *attribute);
 
   struct tm getTimestamp();
   struct tm *getTimestampAddress();
   double getValue();
-  vector<Attribute *> getAttributeList();
+  Attribute *getAttribute();
   void printInfo();
 };
 

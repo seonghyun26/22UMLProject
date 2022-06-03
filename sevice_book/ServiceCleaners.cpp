@@ -37,8 +37,7 @@ double ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> senso
   double attributeStartUnit;
   double attributeEndUnit;
   vector<Sensor *> sensor_list_by_distance(sensor_list);
-  vector<Attribute *> attributeListStartTM;
-  vector<Attribute *> attributeListEndTM;
+  double measurementStartValue, measurementEndValue;
 
   // Sort the sensors by distance from cleaner
   if (sensor_list_by_distance.size() == 0)
@@ -60,20 +59,37 @@ double ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> senso
 
     // Get the measurements before & after the cleaner activation
     Measurement *dummyStartTM = new Measurement(startTM);
-    Measurement *dummyEndTM = new Measurement(startTM);
-    attributeListStartTM = (*lower_bound(measurement_list.begin(), measurement_list.end(), dummyStartTM, cmpMeasurementByTM))->getAttributeList();
-    attributeListEndTM = (*upper_bound(measurement_list.begin(), measurement_list.end(), dummyEndTM, cmpMeasurementByTM))->getAttributeList();
+    Measurement *dummyEndTM = new Measurement(endTM);
+    measurementStartValue = (*lower_bound(measurement_list.begin(), measurement_list.end(), dummyStartTM, cmpMeasurementByTM))->getValue();
+    measurementEndValue = (*upper_bound(measurement_list.begin(), measurement_list.end(), dummyEndTM, cmpMeasurementByTM))->getValue();
+
+    int startFlag = 0, endFlag = 0;
+    vector<double> measurementStartAttributes;
+    vector<double> measurementEndAttributes;
+    for (auto meas_it : measurement_list)
+    {
+      if (startFlag >= 4 && endFlag >= 4)
+        break;
+      if (mktime(meas_it->getTimestampAddress()) > mktime(&startTM) && startFlag < 4)
+      {
+        startFlag++;
+        measurementStartAttributes.push_back(meas_it->getValue());
+      }
+      if (mktime(meas_it->getTimestampAddress()) < mktime(&endTM) && endFlag < 4)
+      {
+        endFlag++;
+        measurementEndAttributes.push_back(meas_it->getValue());
+      }
+    }
 
     // If all the attributes did Improve, Update cleaned radius
     int improvedAttributeCnt = 0;
-    for (int i = 0; i < attributeListStartTM.size(); i++)
+    for (int i = 0; i < 4; i++)
     {
-      attributeStartUnit = stod(attributeListStartTM[i]->getUnit());
-      attributeEndUnit = stod(attributeListEndTM[i]->getUnit());
-      if (attributeStartUnit > attributeEndUnit)
+      if (measurementStartAttributes[i] < measurementEndAttributes[i])
         improvedAttributeCnt++;
     }
-    if (attributeListStartTM.size() == improvedAttributeCnt)
+    if (improvedAttributeCnt == 4)
       radiusCleanedArea = sensor_it->getDistanceFromCoordinate();
   }
 
@@ -84,17 +100,15 @@ double ServiceCleaners::calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> senso
   User Input: Coordinate(latitude, longitude), time(start timestamp, end timestamp)
   Output: returns a vector pair<string, double>, with the attribute ID and unit
 */
-vector<pair<string, double>> ServiceCleaners::calcImprovementAirQuality(double latitude, double longitude, struct tm startTM, struct tm endTM, vector<Sensor *> sensor_list)
+double ServiceCleaners::calcImprovementAirQuality(double latitude, double longitude, struct tm startTM, struct tm endTM, vector<Sensor *> sensor_list)
 {
   // Sort the sensors by distance from coordinate, get the closest one
   vector<Sensor *> sensor_list_by_distance(sensor_list);
-  vector<pair<string, double>> airQualityImprovement;
 
   if (sensor_list_by_distance.size() == 0)
   {
     cout << "No Sensors in List\n";
-    airQualityImprovement.push_back(make_pair("NULL", 0));
-    return airQualityImprovement;
+    return -1;
   }
 
   for (auto it : sensor_list_by_distance)
@@ -109,24 +123,11 @@ vector<pair<string, double>> ServiceCleaners::calcImprovementAirQuality(double l
   measurement_list = closest_sensor->getMeasurement();
   Measurement *dummyStartTM = new Measurement(startTM);
   Measurement *dummyEndTM = new Measurement(startTM);
-  vector<Attribute *> attributeListStartTM = (*lower_bound(measurement_list.begin(), measurement_list.end(), dummyStartTM, cmpMeasurementByTM))->getAttributeList();
-  vector<Attribute *> attributeListEndTM = (*upper_bound(measurement_list.begin(), measurement_list.end(), dummyEndTM, cmpMeasurementByTM))->getAttributeList();
+  double valueStartTM = (*lower_bound(measurement_list.begin(), measurement_list.end(), dummyStartTM, cmpMeasurementByTM))->getValue();
+  double valueEndTM = (*upper_bound(measurement_list.begin(), measurement_list.end(), dummyEndTM, cmpMeasurementByTM))->getValue();
 
   // Compare the two attributes by id
-  double difference;
-  for (int i = 0; i < attributeListStartTM.size(); i++)
-  {
-    string unitStartTM = attributeListStartTM[i]->getId();
-    for (int j = 0; j < attributeListEndTM.size(); j++)
-    {
-      string unitEndTM = attributeListEndTM[j]->getId();
-      if (unitStartTM == unitEndTM)
-      {
-        difference = stod(attributeListStartTM[i]->getUnit()) - stod(attributeListEndTM[j]->getUnit());
-        airQualityImprovement.push_back(make_pair(unitStartTM, difference));
-      }
-    }
-  }
+  double difference = valueEndTM - valueStartTM;
 
-  return airQualityImprovement;
+  return difference;
 }
