@@ -3,9 +3,6 @@
 #include <string>
 using namespace std;
 
-#include <vector>
-#include "Sensor.h"
-
 class User
 {
 protected:
@@ -13,7 +10,6 @@ protected:
 	string login;
 	string password;
 	int type;
-	vector<Sensor *> sensorList;
 
 public:
 	User(string id, string login, string password, int type);
@@ -21,13 +17,11 @@ public:
 	string getLogin();
 	string getPassword();
 	int getType();
-	vector<Sensor *> getSensorList();
 
 	void setId(string id);
 	void setLogin(string login);
 	void setPassword(string password);
 	void setType(int type);
-	void addSensor(Sensor *newSensor);
 };
 
 #endif

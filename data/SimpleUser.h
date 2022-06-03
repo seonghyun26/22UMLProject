@@ -11,14 +11,14 @@ class SimpleUser : public User
 {
 protected:
   int rewardCount;
-  vector<Sensor> sensors;
+  vector<Sensor *> sensors;
 
 public:
 	SimpleUser(string id,string login, string password);
   int getRewardCount();
-  vector<Sensor> getSensors() ;
+  vector<Sensor *> getSensors() ;
   void setRewardCount(int rewardCount) ;
-  void setSensors(vector<Sensor> sensors) ;
+	void addSensor(Sensor *newSensor);
 };
 
 #endif

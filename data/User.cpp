@@ -11,10 +11,8 @@ string User::getId() { return id; }
 string User::getLogin() { return login; }
 string User::getPassword() { return password; }
 int User::getType() { return type; }
-vector<Sensor *> User::getSensorList() { return sensorList; }
 
 void User::setId(string id) { this->id = id; }
 void User::setLogin(string login) { this->login = login; }
 void User::setPassword(string password) { this->password = password; }
 void User::setType(int type) { this->type = type; }
-void User::addSensor(Sensor *newSensor) { this->sensorList.push_back(newSensor); }
