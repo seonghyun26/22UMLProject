@@ -10,7 +10,7 @@ using namespace std;
 
 extern vector<Provider> providerList;
 extern vector<Cleaner> cleanerList;
-extern vector<Sensor *> sensorList;
+extern vector<Sensor> sensorList;
 
 ProviderInterface::ProviderInterface() : Interface()
 {

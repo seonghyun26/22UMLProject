@@ -9,8 +9,8 @@ class ServiceCleaners
 {
 public:
   bool provideCleaner(Provider *p, Cleaner *c);
-  double calcRadiusCleanedArea(Cleaner *c, vector<Sensor *> sensor_list);
-  double calcImprovementAirQuality(double latitude, double longitude, struct tm startTM, struct tm endTM, vector<Sensor *> sensor_list);
+  double calcRadiusCleanedArea(Cleaner *c, vector<Sensor> sensor_list);
+  double calcImprovementAirQuality(double latitude, double longitude, struct tm startTM, struct tm endTM, vector<Sensor> sensor_list);
 };
 
 #endif

@@ -7,7 +7,7 @@
 #include "../interface/ProviderInterface.h"
 
 extern vector<Cleaner> cleanerList;
-extern vector<Sensor *> sensorList;
+extern vector<Sensor> sensorList;
 
 using namespace std;
 
