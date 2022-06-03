@@ -7,7 +7,7 @@
 #include "TESTS/TestSevice.h"
 
 #include "./data/Sensor.h"
-vector<Sensor *> sensorList;
+//vector<Sensor *> sensorList;
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
   testAllService();
   // INITIALIZATION
   AttributesDAO daoAttr = AttributesDAO();
-  daoAttr.parseAttributes("csv/attributes.csv");
+  daoAttr.parseAttributesMeasurementSensorAndUser("csv/attributes.csv","csv/measurement.csv","csv/sensors.csv","csv/users.csv");
   ProviderDAO daoProv = ProviderDAO();
   daoProv.parseProviderAndCleaner("csv/providers.csv", "csv/cleaners.csv");
   // TODO: initialization for other things ex) Sensor,  etc..

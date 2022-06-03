@@ -8,7 +8,7 @@ vector<Sensor> sensorList=vector<Sensor>();
 vector<SimpleUser> userList=vector<SimpleUser>();
 vector<Measurement> measurementList=vector<Measurement>();
 
-void parseAttributesMeasurementSensorAndUser(
+void AttributesDAO::parseAttributesMeasurementSensorAndUser(
 				string attributesPath,
 				string measurementsPath,
 				string sensorsPath,

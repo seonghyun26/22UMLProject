@@ -12,7 +12,7 @@ void testAllDAO()
 void testAttributesDAO()
 {
   AttributesDAO daoAttr = AttributesDAO();
-  daoAttr.parseAttributes("csv/attributes.csv");
+  daoAttr.parseAttributesMeasurementSensorAndUser("csv/attributes.csv","csv/measurement.csv","csv/sensors.csv","csv/users.csv");
   for (Attribute a : attrList)
   {
   	cout << "{id:" << a.getId();
