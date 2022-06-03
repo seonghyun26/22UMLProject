@@ -40,10 +40,8 @@ void testServiceCleaners()
   double longitude = cleanerTest->getLongitude();
   struct tm startTM = cleanerTest->getStartTM();
   struct tm endTM = cleanerTest->getEndTM();
-  vector<pair<string, double>> improvementAQList = serviceCleaner->calcImprovementAirQuality(latitude, longitude, startTM, endTM, sensorList);
-  for (auto it : improvementAQList)
-  {
-    cout << "=> Attribute '" << it.first << "' Improvment : " << it.second << "\n";
-  }
+  double improvementAQ = serviceCleaner->calcImprovementAirQuality(latitude, longitude, startTM, endTM, sensorList);
+  cout << " Improvment : " << improvementAQ << "\n";
+
   cout << "--- Testing Service Cleaners function - calculateImprovementAQ() ---\n\n";
 }
